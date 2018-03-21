@@ -1,0 +1,39 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <!-- JOB !-->
+	<bean id="WakeUp" class="com.wakeup.WakeUpTask">
+	</bean>
+	
+	<bean id="WakeUpJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    	<property name="targetObject" ref="WakeUp" />
+    	<property name="targetMethod" value="launch" />
+	</bean>
+	
+	<bean id="Trigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	    <property name="jobDetail" ref="WakeUpJob" />
+	    <property name="cronExpression" value="	0 0/1 * 1/1 * ? *" />
+	</bean>
+	
+	<bean  class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	    <property name="jobDetails">
+	        <list>
+	            <ref bean="WakeUpJob" />
+	        </list>
+	    </property>
+	    <property name="triggers">
+	        <list>
+	            <ref bean="Trigger" />
+	        </list>
+	    </property>
+	</bean>
+
+
+</beans>
+
+	
+	
