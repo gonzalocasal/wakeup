@@ -16,7 +16,7 @@
 	
 	<bean id="Trigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 	    <property name="jobDetail" ref="WakeUpJob" />
-	    <property name="cronExpression" value="0 30 8 1/1 * ? *" />
+	    <property name="cronExpression" value="0 15 7 1/1 * ? *" />
 	</bean>
 	
 	<bean  class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
